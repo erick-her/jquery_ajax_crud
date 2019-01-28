@@ -65,25 +65,25 @@
           <form>
             <div class="input-field">
               <i class="material-icons prefix">info</i>
-              <input type="text" id="first_name" name="first_name" class="validate" required>
+              <input type="text" name="first_name" class="validate" required>
               <label for="first_name">First name</label>
               <span class="helper-text" data-error="First name is required."></span>
             </div>
             <div class="input-field">
               <i class="material-icons prefix">info_outline</i>
-              <input type="text" id="last_name" name="last_name" class="validate" required>
+              <input type="text" name="last_name" class="validate" required>
               <label for="last_name">Last name</label>
               <span class="helper-text" data-error="Last name is required."></span>
             </div>
             <div class="input-field">
               <i class="material-icons prefix">phone</i>
-              <input type="tel" id="phone_number" name="phone_number" class="validate" required>
+              <input type="tel" name="phone_number" class="validate" required>
               <label for="phone_number">Phone number</label>
               <span class="helper-text" data-error="Phone number is required."></span>
             </div>
             <div class="input-field">
               <i class="material-icons prefix">email</i>
-              <input type="email" id="email" name="email" class="validate" required>
+              <input type="email" name="email" class="validate" required>
               <label for="email">Email</label>
               <span class="helper-text" data-error="Email is not valid."></span>
             </div>
@@ -92,7 +92,47 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-small grey lighten-1 modal-close">Close</button>
-      <button class="btn btn-small green">Submit</button>
+      <button type="submit" class="btn btn-small green darken-3" id="add-submit">Submit</button>
+    </div>
+  </div>
+
+  <!--Edit user modal-->
+  <div id="edit-user" class="modal">
+    <div class="modal-content">
+        <h4>EDIT USER</h4>
+        <hr class="yellow-hr">
+        <div class="container">
+          <form>
+            <div class="input-field">
+              <i class="material-icons prefix">info</i>
+              <input type="text" name="first_name" class="validate" required>
+              <label for="first_name">First name</label>
+              <span class="helper-text" data-error="First name is required."></span>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">info_outline</i>
+              <input type="text" name="last_name" class="validate" required>
+              <label for="last_name">Last name</label>
+              <span class="helper-text" data-error="Last name is required."></span>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">phone</i>
+              <input type="tel" name="phone_number" class="validate" required>
+              <label for="phone_number">Phone number</label>
+              <span class="helper-text" data-error="Phone number is required."></span>
+            </div>
+            <div class="input-field">
+              <i class="material-icons prefix">email</i>
+              <input type="email" name="email" class="validate" required>
+              <label for="email">Email</label>
+              <span class="helper-text" data-error="Email is not valid."></span>
+            </div>
+          </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-small grey lighten-1 modal-close">Close</button>
+      <button type="submit" class="btn btn-small yellow darken-3" id="edit-submit">Confirm changes</button>
     </div>
   </div>
 
