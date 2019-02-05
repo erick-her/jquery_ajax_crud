@@ -19,3 +19,8 @@
   color: rgba(215, 193, 40, 0.77);
   margin-bottom: 5px;
 }
+
+/**Overriding floating button class**/
+.btn-floating {
+  margin: 2px;
+}

@@ -30,7 +30,17 @@
     * Read user function.
     **/
     function read(){
+      // Query
+      $query = 'SELECT first_name, last_name, phone_number, email FROM '
+      . $this->table_name;
 
+      // Prepare query
+      $stmt = $this->conn->prepare($query);
+
+      // Execute query
+      $stmt->execute();
+      
+      return $stmt;
     }
 
     /**
