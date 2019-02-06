@@ -46,4 +46,37 @@ $(document).ready(function(){
     $('tbody').html(rows);
   }
 
+  /**
+  * Create new user.
+  **/
+  $('#add-submit').click(function(e){
+    e.preventDefault();
+    var create_modal = $('#add-user');
+    var form_action = create_modal.find("form").attr("action");
+    var form_method = create_modal.find("form").attr("method");
+    var first_name = create_modal.find("input[name='first_name']").val();
+    var last_name = create_modal.find("input[name='last_name']").val();
+    var phone_number = create_modal.find("input[name='phone_number']").val();
+    var email = create_modal.find("input[name='email']").val();
+
+    $.ajax({
+      type: form_method,
+      url: url + form_action,
+      data: {first_name:first_name, last_name:last_name, phone_number:phone_number, email:email}
+    }).done(function(data){
+      if(data == 'success'){
+        create_modal.find("input[name='first_name']").val('');
+        create_modal.find("input[name='last_name']").val('');
+        create_modal.find("input[name='phone_number']").val('');
+        create_modal.find("input[name='email']").val('');
+        getData();
+        alert('User created successfully!');
+
+        // close modal and add custom alert message.
+      }else{
+        alert(data);
+      }
+    });
+  });
+
 });
