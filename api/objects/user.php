@@ -60,7 +60,8 @@
     function read(){
       // Query
       $query = 'SELECT first_name, last_name, phone_number, email FROM '
-      . $this->table_name;
+      . $this->table_name .
+      ' ORDER BY user_id DESC';
 
       // Prepare query
       $stmt = $this->conn->prepare($query);
