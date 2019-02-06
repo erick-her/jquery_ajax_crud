@@ -1,6 +1,5 @@
 $(document).ready(function(){
   var url = 'http://localhost:8000/';
-  var page = 1;
 
   // Call getData Function to display data
   getData();
@@ -16,8 +15,7 @@ $(document).ready(function(){
   function getData(){
     $.ajax({
       dataType: 'json',
-      url: url + 'api/User/read.php',
-      data: {page:page}
+      url: url + 'api/User/read.php'
     }).done(function(data){
       if(data.status = 'success'){
         manageRow(data.data);
@@ -36,11 +34,12 @@ $(document).ready(function(){
       rows = rows + '<td>'+value.last_name+'</td>';
       rows = rows + '<td>'+value.phone_number+'</td>';
       rows = rows + '<td>'+value.email+'</td>';
-      rows = rows + '<td data-id="'+value.user_id+'">';
+      rows = rows + '<td data-id="'+value.id+'">';
       rows = rows + '<a href="#edit-user" class="btn-floating btn-small yellow darken-2 modal-trigger"><i class="material-icons">edit</i></a>';
-      rows = rows + '<a href="#remove-user" class="btn-floating btn-small red darken-2 modal-trigger"><i class="material-icons">delete</i></a>';
+      rows = rows + '<a id="remove-submit" href="#remove-user" class="btn-floating btn-small red darken-2 modal-trigger"><i class="material-icons">delete</i></a>';
       rows = rows + '</td>';
       rows = rows + '</tr>';
+      console.log(value.first_name + ', ' + value.last_name + ', ' + value.phone_number + ', ' + value.id);
     });
 
     $('tbody').html(rows);
@@ -70,11 +69,12 @@ $(document).ready(function(){
         create_modal.find("input[name='phone_number']").val('');
         create_modal.find("input[name='email']").val('');
         getData();
-        alert('User created successfully!');
+         M.toast({html: 'User created successfully!'});
 
-        // close modal and add custom alert message.
+         // Close modal
+         $('.modal').modal('close');
       }else{
-        alert(data);
+         M.toast({html: data});
       }
     });
   });
