@@ -36,7 +36,7 @@ $(document).ready(function(){
       rows = rows + '<td>'+value.email+'</td>';
       rows = rows + '<td data-id="'+value.user_id+'">';
       rows = rows + '<a href="#edit-user" class="btn-floating btn-small yellow darken-2 modal-trigger"><i class="material-icons">edit</i></a>';
-      rows = rows + '<a id="remove-submit" href="#remove-user" class="btn-floating btn-small red darken-2 modal-trigger"><i class="material-icons">delete</i></a>';
+      rows = rows + '<a href="#delete-user" class="btn-floating btn-small red darken-2 modal-trigger delete-user"><i class="material-icons">delete</i></a>';
       rows = rows + '</td>';
       rows = rows + '</tr>';
     });
@@ -67,13 +67,39 @@ $(document).ready(function(){
         create_modal.find("input[name='last_name']").val('');
         create_modal.find("input[name='phone_number']").val('');
         create_modal.find("input[name='email']").val('');
-        getData();
-         M.toast({html: 'User created successfully!'});
 
-         // Close modal
-         $('.modal').modal('close');
+        // Close modal
+        $('.modal').modal('close');
+
+        getData();
+
+        M.toast({html: 'User created successfully!'});
       }else{
          M.toast({html: data});
+      }
+    });
+  });
+
+  /**
+  * Delete user funtion.
+  **/
+  $('body').on('click', '#delete-submit', function(){
+    var id = $('.delete-user').parent("td").data('id');
+    var c_obj = $('.delete-user').parents("tr");
+
+    $.ajax({
+      dataType: 'json',
+      type:'POST',
+      url: url + 'api/User/delete.php',
+      data:{id:id}
+    }).done(function(data){
+      if(data.status == 'success'){
+        $('.modal').modal('close');
+        c_obj.remove();
+        getData();
+        M.toast({html: 'User: ' + data.id + ' removed succesfully'});
+      }else{
+        M.toast({html: data.status});
       }
     });
   });

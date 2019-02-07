@@ -83,6 +83,19 @@
     * Delete user function.
     **/
     function delete(){
+      $query = 'DELETE FROM '
+      . $this->table_name .
+      ' WHERE user_id ='
+      . $this->id;
 
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Execute
+      if($stmt->execute()){
+        return true;
+      }else{
+        return false;
+      }
     }
   }
