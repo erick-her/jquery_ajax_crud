@@ -59,7 +59,7 @@
     **/
     function read(){
       // Query
-      $query = 'SELECT first_name, last_name, phone_number, email FROM '
+      $query = 'SELECT user_id, first_name, last_name, phone_number, email FROM '
       . $this->table_name .
       ' ORDER BY user_id DESC';
 

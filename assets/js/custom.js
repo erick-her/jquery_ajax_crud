@@ -34,12 +34,11 @@ $(document).ready(function(){
       rows = rows + '<td>'+value.last_name+'</td>';
       rows = rows + '<td>'+value.phone_number+'</td>';
       rows = rows + '<td>'+value.email+'</td>';
-      rows = rows + '<td data-id="'+value.id+'">';
+      rows = rows + '<td data-id="'+value.user_id+'">';
       rows = rows + '<a href="#edit-user" class="btn-floating btn-small yellow darken-2 modal-trigger"><i class="material-icons">edit</i></a>';
       rows = rows + '<a id="remove-submit" href="#remove-user" class="btn-floating btn-small red darken-2 modal-trigger"><i class="material-icons">delete</i></a>';
       rows = rows + '</td>';
       rows = rows + '</tr>';
-      console.log(value.first_name + ', ' + value.last_name + ', ' + value.phone_number + ', ' + value.id);
     });
 
     $('tbody').html(rows);
