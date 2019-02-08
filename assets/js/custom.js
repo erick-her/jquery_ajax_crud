@@ -35,7 +35,7 @@ $(document).ready(function(){
       rows = rows + '<td>'+value.phone_number+'</td>';
       rows = rows + '<td>'+value.email+'</td>';
       rows = rows + '<td data-id="'+value.user_id+'">';
-      rows = rows + '<a href="#edit-user" class="btn-floating btn-small yellow darken-2 modal-trigger"><i class="material-icons">edit</i></a>';
+      rows = rows + '<a href="#edit-user" class="btn-floating btn-small yellow darken-2 modal-trigger edit-user"><i class="material-icons">edit</i></a>';
       rows = rows + '<a href="#delete-user" class="btn-floating btn-small red darken-2 modal-trigger delete-user"><i class="material-icons">delete</i></a>';
       rows = rows + '</td>';
       rows = rows + '</tr>';
@@ -81,7 +81,7 @@ $(document).ready(function(){
   });
 
   /**
-  * Delete user funtion.
+  * Delete user function.
   **/
   $('body').on('click', '#delete-submit', function(){
     var id = $('.delete-user').parent("td").data('id');
@@ -100,6 +100,55 @@ $(document).ready(function(){
         M.toast({html: 'User: ' + data.id + ' removed succesfully'});
       }else{
         M.toast({html: data.status});
+      }
+    });
+  });
+
+  /**
+  * Display table data on inputs function.
+  **/
+  $('body').on('click', '.edit-user', function(){
+    var id = $(this).parent("td").data('id');
+    var first_name = $(this).parent("td").prev("td").prev("td").prev("td").prev("td").text();
+    var last_name = $(this).parent("td").prev("td").prev("td").prev("td").text();
+    var phone_number = $(this).parent("td").prev("td").prev("td").text();
+    var email = $(this).parent("td").prev("td").text();
+
+    $("#edit-user").find("input[name='first_name']").val(first_name);
+    $("#edit-user").find("input[name='last_name']").val(last_name);
+    $("#edit-user").find("input[name='phone_number']").val(phone_number);
+    $("#edit-user").find("input[name='email']").val(email);
+    $("#edit-user").find(".edit-id").val(id);
+  });
+
+  /**
+  * Update user function.
+  **/
+  $('#edit-submit').click(function(e){
+    e.preventDefault();
+
+    var edit_modal = $("#edit-user");
+
+    var form_action = edit_modal.find("form").attr("action");
+    var form_method = edit_modal.find("form").attr("method");
+
+    var first_name = edit_modal.find("input[name='first_name']").val();
+    var last_name = edit_modal.find("input[name='last_name']").val();
+    var phone_number = edit_modal.find("input[name='phone_number']").val();
+    var email = edit_modal.find("input[name='email']").val();
+    var id = edit_modal.find(".edit-id").val();
+
+    $.ajax({
+      type: form_method,
+      url: url + form_action,
+      data: {first_name:first_name, last_name:last_name, phone_number:phone_number, email:email, id:id}
+    }).done(function(data){
+      if(data == 'success'){
+        $('.modal').modal('close');
+        getData();
+        M.toast({html: 'Updated user successfully!'});
+      }else{
+         M.toast({html: data});
       }
     });
   });

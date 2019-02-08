@@ -76,7 +76,32 @@
     * Update user function.
     **/
     function update(){
+      $query = 'UPDATE '
+      . $this->table_name .
+      ' SET first_name=:first_name, last_name=:last_name, phone_number=:phone_number, email=:email'
+      . ' WHERE user_id=' . $this->id;
 
+      // Prepare statement
+      $stmt = $this->conn->prepare($query);
+
+      // Sanitize
+      $this->first_name = htmlspecialchars(strip_tags($this->first_name));
+      $this->last_name = htmlspecialchars(strip_tags($this->last_name));
+      $this->phone_number = htmlspecialchars(strip_tags($this->phone_number));
+      $this->email = htmlspecialchars(strip_tags($this->email));
+
+      // Bind
+      $stmt->bindParam(':first_name', $this->first_name);
+      $stmt->bindParam(':last_name', $this->last_name);
+      $stmt->bindParam(':phone_number', $this->phone_number);
+      $stmt->bindParam(':email', $this->email);
+
+      // Execute
+      if($stmt->execute()){
+        return true;
+      }else{
+        return false;
+      }
     }
 
     /**
