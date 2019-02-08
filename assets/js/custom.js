@@ -57,27 +57,31 @@ $(document).ready(function(){
     var phone_number = create_modal.find("input[name='phone_number']").val();
     var email = create_modal.find("input[name='email']").val();
 
-    $.ajax({
-      type: form_method,
-      url: url + form_action,
-      data: {first_name:first_name, last_name:last_name, phone_number:phone_number, email:email}
-    }).done(function(data){
-      if(data == 'success'){
-        create_modal.find("input[name='first_name']").val('');
-        create_modal.find("input[name='last_name']").val('');
-        create_modal.find("input[name='phone_number']").val('');
-        create_modal.find("input[name='email']").val('');
+    if(first_name != '' && last_name != '' && phone_number != '' && email != ''){
+      $.ajax({
+        type: form_method,
+        url: url + form_action,
+        data: {first_name:first_name, last_name:last_name, phone_number:phone_number, email:email}
+      }).done(function(data){
+        if(data == 'success'){
+          create_modal.find("input[name='first_name']").val('');
+          create_modal.find("input[name='last_name']").val('');
+          create_modal.find("input[name='phone_number']").val('');
+          create_modal.find("input[name='email']").val('');
 
-        // Close modal
-        $('.modal').modal('close');
+          // Close modal
+          $('.modal').modal('close');
 
-        getData();
+          getData();
 
-        M.toast({html: 'User created successfully!'});
-      }else{
-         M.toast({html: data});
-      }
-    });
+          M.toast({html: 'User created successfully!', classes: 'green'});
+        }else{
+           M.toast({html: data});
+        }
+      });
+    }else{
+      M.toast({html: 'Fields are required!', classes: 'red'});
+    }
   });
 
   /**
@@ -97,9 +101,9 @@ $(document).ready(function(){
         $('.modal').modal('close');
         c_obj.remove();
         getData();
-        M.toast({html: 'User: ' + data.id + ' removed succesfully'});
+        M.toast({html: 'User: ' + data.id + ' has been removed', classes: 'green'});
       }else{
-        M.toast({html: data.status});
+        M.toast({html: data.status, classes: 'red'});
       }
     });
   });
@@ -138,19 +142,23 @@ $(document).ready(function(){
     var email = edit_modal.find("input[name='email']").val();
     var id = edit_modal.find(".edit-id").val();
 
-    $.ajax({
-      type: form_method,
-      url: url + form_action,
-      data: {first_name:first_name, last_name:last_name, phone_number:phone_number, email:email, id:id}
-    }).done(function(data){
-      if(data == 'success'){
-        $('.modal').modal('close');
-        getData();
-        M.toast({html: 'Updated user successfully!'});
-      }else{
-         M.toast({html: data});
-      }
-    });
+    if(first_name != '' && last_name != '' && phone_number != '' && email != ''){
+      $.ajax({
+        type: form_method,
+        url: url + form_action,
+        data: {first_name:first_name, last_name:last_name, phone_number:phone_number, email:email, id:id}
+      }).done(function(data){
+        if(data == 'success'){
+          $('.modal').modal('close');
+          getData();
+          M.toast({html: 'User has been updated!', classes: 'green'});
+        }else{
+          M.toast({html: data, classes: 'red'});
+        }
+      });
+    }else{
+      M.toast({html: 'Fields are required!', classes: 'red'});
+    }
   });
 
 });

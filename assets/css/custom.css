@@ -4,22 +4,6 @@
   padding-bottom: 10px;
 }
 
-/**Hr styles**/
-.green-hr {
-  color: rgba(101, 221, 82, 0.77);
-  margin-bottom: 5px;
-}
-
-.red-hr {
-  color: rgba(232, 55, 55, 0.77);
-  margin-bottom: 5px;
-}
-
-.yellow-hr {
-  color: rgba(215, 193, 40, 0.77);
-  margin-bottom: 5px;
-}
-
 /**Overriding floating button class**/
 .btn-floating {
   margin: 2px;
