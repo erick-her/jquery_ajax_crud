@@ -8,3 +8,8 @@
 .btn-floating {
   margin: 2px;
 }
+
+/**Add top margin to nav**/
+.nav-wrapper {
+  margin-top: 10px;
+}
