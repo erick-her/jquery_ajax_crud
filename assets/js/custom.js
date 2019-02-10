@@ -19,6 +19,17 @@ $(document).ready(function(){
     }).done(function(data){
       if(data.status = 'success'){
         manageRow(data.data);
+
+        // Call predefined pagination plugin function
+        $('tbody').pageMe({
+          pagerSelector:'#pagination',
+          activeColor: 'deep-orange',
+          prevText:'Prev',
+          nextText:'Next',
+          showPrevNext:true,
+          hidePageNumbers:false,
+          perPage:3
+        });
       }
     });
   }
@@ -76,7 +87,7 @@ $(document).ready(function(){
 
           M.toast({html: 'User created successfully!', classes: 'green'});
         }else{
-           M.toast({html: data});
+           M.toast({html: data, classes: 'red'});
         }
       });
     }else{
@@ -180,12 +191,14 @@ $(document).ready(function(){
       }).done(function(data){
         if(data.status == 'success'){
           manageRow(data.data);
+          $('.pag').hide();
         }
       });
 
     }else{
       // If search input is empty return all data
       getData();
+      $('.pag').show();
     }
 
   });
