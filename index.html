@@ -27,6 +27,18 @@
       </div>
     </section>
 
+    <!--Search-->
+    <section class="row" id="search-field">
+      <div class="col s12">
+        <form action="api/User/search.php" method="POST" class="left">
+          <div class="input-field">
+            <input type="text" id="search" placeholder="Search by name" name="search" autocomplete="off">
+          </div>
+        </form>
+        <h5 class="grey-text text-lighten-2 right">User info management</h5>
+      </div>
+    </section>
+
     <!---Floating action button-->
     <div class="fixed-action-btn">
       <a href="#add-user" class="btn-floating pulse btn-large green modal-trigger">
@@ -36,7 +48,6 @@
 
     <!--Table-->
     <section class="row">
-      <h5 class="grey-text text-lighten-2 right">User info management</h5>
       <div class="col s12 l12">
         <table class="responsive-table highlight centered">
           <thead>

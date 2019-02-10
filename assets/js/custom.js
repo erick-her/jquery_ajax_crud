@@ -52,10 +52,10 @@ $(document).ready(function(){
     var create_modal = $('#add-user');
     var form_action = create_modal.find("form").attr("action");
     var form_method = create_modal.find("form").attr("method");
-    var first_name = create_modal.find("input[name='first_name']").val();
-    var last_name = create_modal.find("input[name='last_name']").val();
-    var phone_number = create_modal.find("input[name='phone_number']").val();
-    var email = create_modal.find("input[name='email']").val();
+    var first_name = create_modal.find("input[name='first_name']").val().trim();
+    var last_name = create_modal.find("input[name='last_name']").val().trim();
+    var phone_number = create_modal.find("input[name='phone_number']").val().trim();
+    var email = create_modal.find("input[name='email']").val().trim();
 
     if(first_name != '' && last_name != '' && phone_number != '' && email != ''){
       $.ajax({
@@ -136,11 +136,11 @@ $(document).ready(function(){
     var form_action = edit_modal.find("form").attr("action");
     var form_method = edit_modal.find("form").attr("method");
 
-    var first_name = edit_modal.find("input[name='first_name']").val();
-    var last_name = edit_modal.find("input[name='last_name']").val();
-    var phone_number = edit_modal.find("input[name='phone_number']").val();
-    var email = edit_modal.find("input[name='email']").val();
-    var id = edit_modal.find(".edit-id").val();
+    var first_name = edit_modal.find("input[name='first_name']").val().trim();
+    var last_name = edit_modal.find("input[name='last_name']").val().trim();
+    var phone_number = edit_modal.find("input[name='phone_number']").val().trim();
+    var email = edit_modal.find("input[name='email']").val().trim();
+    var id = edit_modal.find(".edit-id").val().trim();
 
     if(first_name != '' && last_name != '' && phone_number != '' && email != ''){
       $.ajax({
@@ -159,6 +159,35 @@ $(document).ready(function(){
     }else{
       M.toast({html: 'Fields are required!', classes: 'red'});
     }
+  });
+
+  /**
+  * Search user function.
+  **/
+  $('#search').keyup(function(){
+    var text = $(this).val().trim();
+    var form_action = $('#search-field').find('form').attr('action');
+    var form_method = $('#search-field').find('form').attr('method');
+
+    // Filter users
+    if(text != ''){
+
+      $.ajax({
+        dataType: 'json',
+        url: url + form_action,
+        method: form_method,
+        data: {search:text}
+      }).done(function(data){
+        if(data.status == 'success'){
+          manageRow(data.data);
+        }
+      });
+
+    }else{
+      // If search input is empty return all data
+      getData();
+    }
+
   });
 
 });

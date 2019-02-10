@@ -123,4 +123,22 @@
         return false;
       }
     }
+
+    /**
+    * Search user function.
+    * @param search_value
+    **/
+    function search($search_value){
+      $query = 'SELECT * FROM '
+      . $this->table_name .
+      ' WHERE first_name LIKE "%' . $search_value . '%" OR last_name like"%' . $search_value . '%"';
+
+      // Prepare query
+      $stmt = $this->conn->prepare($query);
+
+      // Execute
+      $stmt->execute();
+
+      return $stmt;
+    }
   }
