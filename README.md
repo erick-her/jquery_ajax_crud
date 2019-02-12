@@ -12,9 +12,11 @@ CRUD (Create, Read, Update, Delete) application, using jQuery, AJAX, PHP and MyS
 
 ## Setup
 
-First import mysqldump file database.sql
+First import mysqldump file database.sql.
 
 After that insert database credentials in api/config/database.php file.
+
+Open up terminal, change to root folder of project and type: php -S localhost:8000
 
 You are all set!!! :)
 
